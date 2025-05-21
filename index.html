@@ -1,149 +1,237 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prompt Generator Produk (Hand)</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-    h1 {
-      text-align: center;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 15px;
-    }
-    input, select, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      box-sizing: border-box;
-    }
-    #output {
-      margin-top: 20px;
-      background: #fff;
-      padding: 15px;
-      border-radius: 5px;
-      white-space: pre-wrap;
-      border: 1px solid #ccc;
-    }
-    #header-image {
-      display: block;
-      max-width: 100%;
-      margin: 0 auto 20px;
-      border-radius: 10px;
-    }
-    #copyBtn {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    #copyBtn:hover {
-      background-color: #45a049;
-    }
-    #toast {
-      visibility: hidden;
-      min-width: 200px;
-      margin-left: -100px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 5px;
-      padding: 10px;
-      position: fixed;
-      z-index: 1;
-      left: 50%;
-      bottom: 30px;
-      font-size: 14px;
-    }
-    #toast.show {
-      visibility: visible;
-      animation: fadein 0.5s, fadeout 0.5s 2s;
-    }
-    @keyframes fadein {
-      from {bottom: 0; opacity: 0;}
-      to {bottom: 30px; opacity: 1;}
-    }
-    @keyframes fadeout {
-      from {bottom: 30px; opacity: 1;}
-      to {bottom: 0; opacity: 0;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Generator Produk (Hand)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Apply Inter font globally and ensure smooth scrolling */
+        body {
+            font-family: 'Inter', sans-serif; /* Ensuring Inter font is applied */
+            scroll-behavior: smooth;
+        }
+        /* Custom styles for toast animation, as Tailwind doesn't directly support keyframe animations for visibility */
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2s;
+        }
+    </style>
 </head>
-<body>
-  <img id="header-image" src="https://i.imgur.com/ZeQOw0L.jpeg" alt="Header Image">
-  <h1>Prompt Generator Produk (Hand)</h1>
-  <label for="product">Tuliskan Merk Produk:</label>
-  <input type="text" id="product" placeholder="Wardah, Kahf, Glad2Glow, etc">
+<body class="font-inter bg-blue-50 text-gray-800 p-4 sm:p-6 md:p-8 max-w-3xl mx-auto leading-relaxed">
+    <img id="header-image" src="https://i.imgur.com/ZeQOw0L.jpeg" alt="Header Image"
+         class="block w-full h-auto mx-auto mb-8 rounded-xl shadow-lg
+                object-cover object-center"
+         onerror="this.onerror=null; this.src='https://placehold.co/1200x400/E0F2FE/2563EB?text=Gambar+Tidak+Tersedia';">
 
-  <label for="background">Latar Belakang:</label>
-  <input type="text" id="background" placeholder="Kebun Apel, Sawah, Minimarket, Gedung, Kereta Api, etc">
+    <h1 class="text-center text-blue-800 text-3xl sm:text-4xl font-extrabold mb-8">
+        Prompt Generator Produk (Hand)
+    </h1>
 
-  <label for="theme">Suasana Tambahan:</label>
-  <input type="text" id="theme" placeholder="bokeh, siang hari, estetika alami, outdoor, etc">
+    <div class="space-y-6">
+        <div>
+            <label for="product" class="font-semibold block mb-2 text-blue-800">
+                Tuliskan Merk Produk:
+            </label>
+            <input type="text" id="product" placeholder="Wardah, Kahf, Glad2Glow, etc"
+                   class="w-full p-3 border border-gray-300 rounded-lg text-base
+                          focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none
+                          shadow-sm transition duration-200 ease-in-out">
+        </div>
 
-  <label for="hand">Gaya Tangan:</label>
-  <select id="hand">
-    <option value="Tangan kiri dengan kuku bersih natural">Tangan kiri dengan kuku bersih natural</option>
-    <option value="Tangan kanan dengan kuku bersih natural">Tangan kanan dengan kuku bersih natural</option>
-    <option value="Tangan dengan kuku manicure">Tangan dengan kuku manicure</option>
-  </select>
+        <div>
+            <label for="background" class="font-semibold block mb-2 text-blue-800">
+                Latar Belakang:
+            </label>
+            <input type="text" id="background" placeholder="Kebun Apel, Sawah, Minimarket, Gedung, Kereta Api, etc"
+                   class="w-full p-3 border border-gray-300 rounded-lg text-base
+                          focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none
+                          shadow-sm transition duration-200 ease-in-out">
+        </div>
 
-  <label for="resolution">Resolusi (Rasio):</label>
-  <select id="resolution">
-    <option value="9:16">9:16</option>
-    <option value="1:1">1:1</option>
-    <option value="16:9">16:9</option>
-  </select>
+        <div>
+            <label for="theme" class="font-semibold block mb-2 text-blue-800">
+                Suasana Tambahan:
+            </label>
+            <input type="text" id="theme" placeholder="bokeh, siang hari, estetika alami, outdoor, etc"
+                   class="w-full p-3 border border-gray-300 rounded-lg text-base
+                          focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none
+                          shadow-sm transition duration-200 ease-in-out">
+        </div>
 
-  <button onclick="generatePrompt()">Hasilkan Prompt</button>
+        <div>
+            <label for="hand" class="font-semibold block mb-2 text-blue-800">
+                Gaya Tangan:
+            </label>
+            <select id="hand"
+                    class="w-full p-3 border border-gray-300 rounded-lg text-base
+                           focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none
+                           shadow-sm transition duration-200 ease-in-out bg-white">
+                <option value="Tangan kiri dengan kuku bersih natural">Tangan kiri dengan kuku bersih natural</option>
+                <option value="Tangan kanan dengan kuku bersih natural">Tangan kanan dengan kuku bersih natural</option>
+                <option value="Tangan dengan kuku manicure">Tangan dengan kuku manicure</option>
+            </select>
+        </div>
 
-  <div id="output"></div>
-  <button id="copyBtn">COPY</button>
+        <div>
+            <label for="resolution" class="font-semibold block mb-2 text-blue-800">
+                Resolusi (Rasio):
+            </label>
+            <select id="resolution"
+                    class="w-full p-3 border border-gray-300 rounded-lg text-base
+                           focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none
+                           shadow-sm transition duration-200 ease-in-out bg-white">
+                <option value="9:16">9:16</option>
+                <option value="1:1">1:1</option>
+                <option value="16:9">16:9</option>
+            </select>
+        </div>
+    </div>
 
-  <div id="toast">Prompt berhasil disalin!</div>
+    <button class="generate-button w-full p-3 mt-8 bg-blue-600 text-white font-bold rounded-lg
+                   cursor-pointer text-lg shadow-md hover:bg-blue-700
+                   transition duration-300 ease-in-out transform hover:scale-105"
+            onclick="generatePrompt('output1')">
+        Hasilkan Prompt Text To Image
+    </button>
+    <div id="output1"
+         class="output-area mt-6 bg-white p-4 rounded-lg border border-gray-300 min-h-20
+                break-words font-mono text-gray-700 overflow-auto text-sm shadow-inner">
+        </div>
+    <button class="copy-button w-full p-3 mt-4 bg-green-600 text-white font-bold rounded-lg
+                   cursor-pointer text-lg shadow-md hover:bg-green-700
+                   transition duration-300 ease-in-out transform hover:scale-105"
+            onclick="copyPrompt('output1')">
+        COPY Text to Image
+    </button>
 
-  <script>
-    function generatePrompt() {
-      const product = document.getElementById('product').value;
-      const background = document.getElementById('background').value;
-      const theme = document.getElementById('theme').value;
-      const hand = document.getElementById('hand').value;
-      const resolution = document.getElementById('resolution').value;
+    <div id="errorMessage" class="error-message text-red-600 mt-4 text-center font-bold text-sm"></div>
 
-      const prompt = `Analyze this image, Create image A high-quality photograph of a hand holding the product \"${product}\" in an outdoor setting. The hand is ${hand}. The background shows ${background} with ${theme}. The image is composed in ${resolution} aspect ratio. Make the setting aesthetically pleasing and unique, yet relevant to the product.`;
+    <div id="toast"
+         class="invisible fixed z-50 left-1/2 -ml-32 bottom-8 min-w-64 bg-gray-800 text-white
+                text-center rounded-lg p-3 text-base shadow-xl">
+        Prompt berhasil disalin!
+    </div>
 
-      document.getElementById('output').textContent = prompt;
-    }
+    <script>
+        /**
+         * Function to generate the prompt based on user input and display it
+         * in the specified output area.
+         * @param {string} outputId - The ID of the HTML element where the prompt will be displayed.
+         */
+        function generatePrompt(outputId) {
+            // Get values from input fields
+            const product = document.getElementById('product').value;
+            const background = document.getElementById('background').value;
+            const theme = document.getElementById('theme').value;
+            const hand = document.getElementById('hand').value;
+            const resolution = document.getElementById('resolution').value;
 
-    document.getElementById('copyBtn').addEventListener('click', async function () {
-      const outputElement = document.getElementById('output');
-      const text = outputElement.textContent;
-      if (!text) return;
-      try {
-        await navigator.clipboard.writeText(text);
-        showToast();
-      } catch (err) {
-        console.error('Clipboard write failed:', err);
-      }
-    });
+            let prompt; // Variable to store the generated prompt
 
-    function showToast() {
-      const toast = document.getElementById('toast');
-      toast.className = "show";
-      setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
-    }
-  </script>
+            // Dynamic prompt for Text to Image generation, incorporating user inputs
+            prompt = `Analyze this image, Create image A high-quality photograph of a hand holding the product "${product}" in an outdoor setting. The hand is ${hand}. The background shows ${background} with ${theme}. The image is composed in ${resolution} aspect ratio. Make the setting aesthetically pleasing and unique, yet relevant to the product.`;
+            
+
+            // Display the generated prompt in the corresponding output area
+            document.getElementById(outputId).textContent = prompt;
+        }
+
+        /**
+         * Function to copy the text content from a specified output area to the clipboard.
+         * It uses `document.execCommand('copy')` for broader compatibility within iframes.
+         * @param {string} outputId - The ID of the HTML element whose content will be copied.
+         */
+        function copyPrompt(outputId) {
+            const outputElement = document.getElementById(outputId);
+            const textToCopy = outputElement.textContent;
+            const errorMessageElement = document.getElementById('errorMessage');
+
+            // Clear any previous error messages
+            errorMessageElement.textContent = '';
+
+            // Check if there's any text to copy
+            if (!textToCopy.trim()) {
+                errorMessageElement.textContent = 'Tidak ada prompt untuk disalin. Harap hasilkan prompt terlebih dahulu.';
+                return; // Exit if no text is present
+            }
+
+            // Create a temporary textarea element to hold the text for copying
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            // Make the textarea invisible and append it to the body
+            tempTextArea.style.position = 'fixed';
+            tempTextArea.style.top = '0';
+            tempTextArea.style.left = '0';
+            tempTextArea.style.width = '1px';
+            tempTextArea.style.height = '1px';
+            tempTextArea.style.padding = '0';
+            tempTextArea.style.border = 'none';
+            tempTextArea.style.outline = 'none';
+            tempTextArea.style.boxShadow = 'none';
+            tempTextArea.style.background = 'transparent';
+            document.body.appendChild(tempTextArea);
+
+            // Select the text in the textarea
+            tempTextArea.select();
+            tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+
+            try {
+                // Execute the copy command
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast(); // Show success toast
+                } else {
+                    // Fallback for browsers where execCommand might fail silently
+                    errorMessageElement.textContent = 'Gagal menyalin prompt. Browser Anda mungkin tidak mendukung penyalinan otomatis, coba salin secara manual.';
+                }
+            } catch (err) {
+                // Catch any errors during the execCommand
+                errorMessageElement.textContent = `Gagal menyalin prompt. Error: ${err.message}`;
+            } finally {
+                // Always remove the temporary textarea
+                document.body.removeChild(tempTextArea);
+            }
+        }
+
+        /**
+         * Function to display a toast notification for a short period.
+         */
+        function showToast() {
+            const toast = document.getElementById('toast');
+            // Add 'show' class to trigger fade-in animation
+            toast.classList.add('show');
+            // Remove 'show' class after 2.5 seconds to trigger fade-out animation and hide
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // Ensure the DOM is fully loaded before attempting to attach event listeners or manipulate elements.
+        // Although buttons use inline `onclick`, this is good practice for more complex scripts.
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial generation of prompts can be added here if needed,
+            // or simply ensure the page is ready for user interaction.
+        });
+    </script>
+
+    <footer class="text-center py-4 mt-10 rounded-lg bg-blue-100 shadow-inner">
+        <p class="text-gray-700 text-sm">
+            Kunjungi kami di
+            <a href="https://www.tiktok.com/@prompt_academy" target="_blank"
+               class="text-blue-600 hover:text-blue-800 underline font-medium">
+                TikTok @prompt_academy
+            </a>
+        </p>
+    </footer>
 </body>
 </html>
